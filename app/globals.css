@@ -192,7 +192,7 @@ main {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--primary);
+  background: radial-gradient(circle at center, var(--primary-light) 0%, var(--primary) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -200,86 +200,80 @@ main {
   overflow: hidden;
 }
 
-.splash-content {
+.logo-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  animation: splashPop 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.logo-wrapper {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  gap: 2rem;
+  animation: splashPop 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .splash-logo {
-  width: 40vw; /* Large logo */
-  max-width: 500px;
+  width: 180px;
   height: auto;
-  filter: drop-shadow(0 0 30px rgba(197, 160, 89, 0.4));
-  animation: logoPulse 2.5s infinite ease-in-out;
-  z-index: 2;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  /* If the logo has a white background, this makes it look like a premium card */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: white;
+  padding: 10px;
+  animation: logoFloat 3s infinite ease-in-out;
 }
 
 .splash-title {
-  position: absolute;
-  bottom: 15%;
   color: var(--accent);
   font-family: var(--font-serif);
-  font-size: 3rem;
-  letter-spacing: 4px;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 6px;
   margin: 0;
+  text-transform: uppercase;
   opacity: 0;
-  animation: titleFadeIn 1s ease-out 0.6s forwards;
-  z-index: 3;
+  animation: titleReveal 1s ease-out 0.5s forwards;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .loading-bar-container {
-  position: absolute;
-  bottom: 10%;
-  width: 300px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
+  width: 240px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
   overflow: hidden;
-  z-index: 3;
+  margin-top: 1rem;
+  position: relative;
 }
 
 .loading-bar {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-light));
-  animation: loadProgress 2s ease-in-out forwards;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: loadProgress 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  box-shadow: 0 0 15px var(--accent);
 }
 
 .fade-out {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.8s ease, visibility 0.8s;
+  transition: opacity 1s ease, visibility 1s;
 }
 
 @keyframes splashPop {
-  0% { transform: scale(0.8); opacity: 0; }
+  0% { transform: scale(0.9); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 
-@keyframes logoPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
-@keyframes titleFadeIn {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
+@keyframes titleReveal {
+  0% { opacity: 0; letter-spacing: 15px; transform: translateY(20px); }
+  100% { opacity: 1; letter-spacing: 6px; transform: translateY(0); }
 }
 
 @keyframes loadProgress {
-  0% { width: 0%; }
-  100% { width: 100%; }
+  0% { width: 0%; left: -100%; }
+  100% { width: 100%; left: 0; }
 }
