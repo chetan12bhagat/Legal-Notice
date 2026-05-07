@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SplashScreen from "./components/SplashScreen";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,20 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable}`}>
         <SplashScreen />
-        <nav className="navbar glass">
-          <div className="nav-container">
-            <div className="logo-section">
-              <img src="/images/logo.png" alt="Legal Notice" className="nav-logo" />
-              <span className="brand-name">Legal Notice</span>
-            </div>
-            <div className="nav-links">
-              <a href="/">Feed</a>
-              <a href="/laws">Indian Laws</a>
-              <a href="/consult">Consult Lawyer</a>
-              <a href="/login" className="login-btn">Login</a>
-            </div>
-          </div>
-        </nav>
+        <Navbar />
         <main>{children}</main>
         <footer className="footer">
           <div className="container">
