@@ -10,6 +10,8 @@ export default function LoginPage() {
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const [success, setSuccess] = useState(false);
+
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -17,14 +19,11 @@ export default function LoginPage() {
       const res = await api.sendOtp(email, role);
       if (res.success) {
         setStep('otp');
-        if (res.debug_otp) {
-          alert(`Debug OTP: ${res.debug_otp}`);
-        }
       } else {
-        alert(res.message);
+        alert(res.message || "Failed to send code.");
       }
     } catch (err) {
-      alert("Failed to send OTP. Is the backend running?");
+      alert("Failed to connect to server. Please ensure the backend is running.");
     } finally {
       setLoading(false);
     }
@@ -36,11 +35,14 @@ export default function LoginPage() {
     try {
       const res = await api.verifyOtp(email, otp);
       if (res.success) {
-        // Store user data
+        setSuccess(true);
         localStorage.setItem('user', JSON.stringify(res.user));
-        window.location.href = '/';
+        // Redirect after a short delay to show success state
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1500);
       } else {
-        alert(res.message);
+        alert(res.message || "Invalid OTP.");
       }
     } catch (err) {
       alert("Verification failed.");
@@ -73,7 +75,13 @@ export default function LoginPage() {
           </button>
         </div>
 
-        {step === 'email' ? (
+        {success ? (
+          <div className="success-state animate-fade">
+            <div className="success-icon">✓</div>
+            <h3>Login Successful!</h3>
+            <p>Redirecting you to the home page...</p>
+          </div>
+        ) : step === 'email' ? (
           <form onSubmit={handleSendOtp} className="login-form">
             <div className="input-group">
               <label>Email Address</label>
@@ -250,6 +258,35 @@ export default function LoginPage() {
           color: var(--primary);
           font-weight: 600;
           cursor: pointer;
+        }
+        .success-state {
+          text-align: center;
+          padding: 2rem 0;
+        }
+        .success-icon {
+          width: 80px;
+          height: 80px;
+          background: #22c55e;
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2.5rem;
+          margin: 0 auto 1.5rem;
+          animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .success-state h3 {
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+          color: var(--primary);
+        }
+        .success-state p {
+          color: var(--text-light);
+        }
+        @keyframes scaleUp {
+          from { transform: scale(0); }
+          to { transform: scale(1); }
         }
       `}</style>
     </div>

@@ -28,8 +28,8 @@ DYNAMODB_TABLE_POSTS = os.getenv('DYNAMODB_TABLE_POSTS', 'Posts')
 # SMTP Configuration (Gmail App Password)
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-EMAIL_SENDER = "chetansb2004@gmail.com" # Using the email account associated with the App Password
-EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD') # ivwplfwoezoxmrur
+EMAIL_SENDER = os.getenv('EMAIL_SENDER', 'bhagatchetan583@gmail.com')
+EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
 # Initialize AWS Clients
 try:
