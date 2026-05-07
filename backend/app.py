@@ -117,14 +117,20 @@ def send_otp():
         
         print(f"--- OTP SENT ---\nTo: {email}\nCode: {otp}\nSuccess: {email_sent}\n----------------")
         
+        if not email_sent:
+            return jsonify({
+                "success": False, 
+                "message": "Failed to send email. Please check backend credentials."
+            }), 500
+        
         return jsonify({
             "success": True, 
-            "message": "Verification code sent to your Gmail inbox" if email_sent else "Check console for code",
-            "email_sent": email_sent
+            "message": "Verification code sent to your Gmail inbox",
+            "email_sent": True
         })
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "message": str(e)}), 500
+        return jsonify({"success": False, "message": f"Server Error: {str(e)}"}), 500
 
 @app.route('/verify-otp', methods=['POST'])
 def verify_otp():
