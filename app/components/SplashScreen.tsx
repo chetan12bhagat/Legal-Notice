@@ -24,14 +24,12 @@ export default function SplashScreen() {
 
   return (
     <div className={`splash-screen ${isFadingOut ? "fade-out" : ""}`}>
-      <div className="splash-content">
-        <div className="logo-wrapper">
-          <img
-            src="/images/logo.png"
-            alt="Legal Notice Logo"
-            className="splash-logo"
-          />
-        </div>
+      <div className="logo-wrapper">
+        <img
+          src="/images/logo.png"
+          alt="Legal Notice Logo"
+          className="splash-logo"
+        />
         <h1 className="splash-title">Legal Notice</h1>
         <div className="loading-bar-container">
           <div className="loading-bar"></div>
