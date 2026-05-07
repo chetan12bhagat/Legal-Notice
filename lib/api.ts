@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 export interface User {
   email: string;
@@ -9,7 +9,7 @@ export interface User {
 
 export const api = {
   sendOtp: async (email: string, role: string) => {
-    const response = await fetch(`${API_BASE_URL}/send-otp`, {
+    const response = await fetch(`${API_BASE_URL}/api/send-otp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, role }),
@@ -18,7 +18,7 @@ export const api = {
   },
 
   verifyOtp: async (email: string, otp: string) => {
-    const response = await fetch(`${API_BASE_URL}/verify-otp`, {
+    const response = await fetch(`${API_BASE_URL}/api/verify-otp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, otp }),
