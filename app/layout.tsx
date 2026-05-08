@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+// Build-ID: DARK_MODE_V3_FINAL
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SplashScreen from "./components/SplashScreen";

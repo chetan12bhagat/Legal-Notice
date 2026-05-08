@@ -14,10 +14,18 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem('user');
-    if (stored) {
-      try { setUser(JSON.parse(stored)); } catch {}
-    }
+    const updateUser = () => {
+      const stored = localStorage.getItem('user');
+      if (stored) {
+        try { setUser(JSON.parse(stored)); } catch {}
+      } else {
+        setUser(null);
+      }
+    };
+
+    updateUser();
+    window.addEventListener('storage', updateUser);
+    return () => window.removeEventListener('storage', updateUser);
   }, []);
 
   const handleLogout = () => {
