@@ -1,4 +1,5 @@
 :root {
+  /* Version: 1.0.5 - UI RESTORE */
   --primary: #0a0a1a;
   --primary-light: #16213e;
   --accent: #c5a059;
@@ -15,30 +16,24 @@
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Force dark mode on everything */
+/* Base Styles */
 html, body {
   background-color: var(--bg-dark) !important;
   color: var(--text-dark) !important;
   font-family: var(--font-sans) !important;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
   font-weight: 700;
-  color: var(--white) !important;
-}
-
-p {
-  color: var(--text-light);
+  color: var(--white);
 }
 
 a {
@@ -62,10 +57,10 @@ button {
 
 /* Glassmorphism */
 .glass {
-  background: rgba(15, 23, 42, 0.7) !important;
+  background: rgba(15, 23, 42, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
 }
 
 /* Navbar */
@@ -77,6 +72,8 @@ button {
   z-index: 1000;
   display: flex;
   align-items: center;
+  background: rgba(10, 10, 26, 0.8);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
 .nav-container {
@@ -88,9 +85,21 @@ button {
   align-items: center;
   padding: 0 2rem;
 }
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 .nav-logo {
-  height: 45px;
+  height: 40px;
+  width: auto;
   filter: brightness(0) invert(1);
+}
+.brand-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.5px;
 }
 .nav-links {
   display: flex;
@@ -115,64 +124,169 @@ button {
   font-weight: 700;
 }
 
-/* Page Wrappers */
-.home-wrapper, .laws-wrapper, .consult-wrapper, .login-wrapper, .profile-page {
-  background: var(--bg-dark) !important;
-  color: var(--text-dark) !important;
+/* Main Layout Fixes */
+main {
+  padding-top: 80px;
+}
+
+/* Home Page */
+.home-wrapper {
+  background: var(--bg-dark);
   min-height: 100vh;
-  padding-top: 80px; /* Offset for fixed navbar */
+}
+.hero-section {
+  height: 70vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(30, 41, 59, 0.4) 0%, rgba(10, 10, 26, 1) 100%);
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+.hero-content h1 {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.text-accent { color: var(--accent); }
+.hero-btns {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.btn-primary-hero {
+  background: var(--accent);
+  color: var(--primary) !important;
+  padding: 1.1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.btn-secondary-hero {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: white !important;
+  padding: 1.1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.btn-secondary-hero:hover {
+  border-color: white;
+  background: rgba(255,255,255,0.05);
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 300px;
+  gap: 2.5rem;
+  margin-top: 4rem;
 }
 
 /* Cards */
 .home-card, .law-card, .consult-card, .login-card, .profile-card-field {
-  background: rgba(30, 41, 59, 0.5) !important;
+  background: rgba(30, 41, 59, 0.4);
   backdrop-filter: blur(10px);
-  border: 1px solid var(--border) !important;
+  border: 1px solid var(--border);
   border-radius: 24px;
-  padding: 2.5rem;
+  padding: 2rem;
   margin-bottom: 2rem;
-  color: var(--text-dark) !important;
 }
 
-/* Hero Section */
-.hero-section {
-  height: 70vh;
-  background: radial-gradient(circle at center, #1e293b 0%, #0a0a1a 100%) !important;
+.avatar-large {
+  width: 80px;
+  height: 80px;
+  background: var(--accent);
+  color: var(--primary);
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  margin-bottom: 4rem;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.8rem;
+  margin: -60px auto 1rem;
+  border: 4px solid var(--bg-dark);
+}
+.profile-bg {
+  height: 100px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  margin: -2rem -2rem 0;
+  border-radius: 24px 24px 0 0;
 }
 
-/* Inputs */
-input, textarea, select {
-  background: rgba(0, 0, 0, 0.3) !important;
-  border: 1px solid var(--border) !important;
-  color: white !important;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
+/* Posts */
+.post-trigger {
   width: 100%;
-}
-input::placeholder {
-  color: rgba(255,255,255,0.3);
-}
-
-/* Badges */
-.law-badge, .rating-badge, .role-badge-profile {
-  background: rgba(197, 160, 89, 0.15) !important;
-  color: var(--accent) !important;
-  padding: 0.5rem 1.2rem;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
   border-radius: 50px;
-  font-weight: 700;
-  font-size: 0.8rem;
+  padding: 1rem 1.5rem;
+  color: var(--text-light);
+  text-align: left;
 }
 
-/* Footer */
-.footer {
-  background: #050510 !important;
-  border-top: 1px solid var(--border);
-  padding: 5rem 0;
-  color: var(--text-light);
+/* Indian Laws Page */
+.laws-wrapper {
+  padding: 6rem 0;
 }
+.laws-header { text-align: center; margin-bottom: 4rem; }
+.search-bar-container {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 1.2rem 2.5rem;
+  margin: 3rem auto;
+  max-width: 800px;
+}
+.search-bar-container input {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  font-size: 1.1rem;
+  outline: none;
+}
+.laws-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+/* Consult Page */
+.consult-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2.5rem;
+}
+.consult-input-group { margin-bottom: 1.5rem; }
+.consult-input-group label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; color: var(--text-light); font-weight: 600; }
+.consult-submit-btn {
+  width: 100%;
+  background: var(--accent);
+  color: var(--primary);
+  padding: 1.2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Profile Details */
+.profile-hero {
+  padding: 6rem 0;
+  background: radial-gradient(circle at 0% 0%, #1e293b 0%, #0a0a1a 100%);
+  border-bottom: 1px solid var(--border);
+}
+.hero-content-profile { display: flex; align-items: center; gap: 3rem; }
+.avatar-img-profile { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--accent); object-fit: cover; }
 
 /* Animations */
 .animate-fade {
@@ -181,4 +295,11 @@ input::placeholder {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .main-layout, .consult-form-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero-content h1 { font-size: 2.8rem; }
 }
