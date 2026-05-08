@@ -38,8 +38,31 @@ const DUMMY_POSTS = [
   }
 ];
 
+interface User {
+  email: string;
+  name?: string;
+  role?: string;
+}
+
 export default function Home() {
   const [posts, setPosts] = useState(DUMMY_POSTS);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('user');
+    if (stored) {
+      try {
+        const userData = JSON.parse(stored);
+        setUser(userData);
+      } catch (err) {
+        console.error("Failed to parse user data", err);
+      }
+    }
+  }, []);
+
+  const displayName = user?.name || user?.email?.split('@')[0] || "Welcome back";
+  const userSub = user ? (user.role === 'lawyer' ? "Legal Professional" : "Member") : "Legal Notice Community";
+  const initials = (user?.name || user?.email || "LN").slice(0, 2).toUpperCase();
 
   return (
     <div className="home-wrapper">
@@ -64,9 +87,9 @@ export default function Home() {
           <div className="card user-mini-profile shadow-premium">
             <div className="profile-bg"></div>
             <div className="profile-info">
-              <div className="avatar-large">LN</div>
-              <h3>Welcome back</h3>
-              <p>Legal Notice Community</p>
+              <div className="avatar-large">{initials}</div>
+              <h3>{user ? `Hello, ${displayName}` : "Welcome back"}</h3>
+              <p>{userSub}</p>
             </div>
             <div className="profile-stats">
               <div className="stat">
@@ -95,7 +118,7 @@ export default function Home() {
           {/* Create Post Card */}
           <div className="card create-post-card shadow-premium">
             <div className="create-row">
-              <div className="avatar-small">LN</div>
+              <div className="avatar-small">{initials}</div>
               <button className="post-trigger">Start a case-related post...</button>
             </div>
             <div className="post-options">
