@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import styles from './laws.module.css';
 
 const LAWS_DB = [
   { id: 1, title: "Indian Penal Code (IPC) / Bharatiya Nyaya Sanhita (BNS)", description: "The primary criminal code of India. It covers offenses like theft, murder, assault, and fraud.", category: "Criminal" },
@@ -23,15 +24,15 @@ export default function LawsPage() {
   });
 
   return (
-    <div className="laws-wrapper">
+    <div className={styles.lawsWrapper}>
       <div className="container">
-        <div className="laws-header animate-fade">
+        <div className={`${styles.lawsHeader} animate-fade`}>
           <h1>Indian Laws Directory</h1>
-          <p>Search and understand the legal framework of India.</p>
+          <p>Search and understand the legal framework of India with professional clarity.</p>
         </div>
 
-        <div className="search-bar-container animate-fade shadow-premium">
-          <span className="search-icon">🔍</span>
+        <div className={`${styles.searchBarContainer} animate-fade`}>
+          <span className={styles.searchIcon}>🔍</span>
           <input 
             type="text" 
             placeholder="Search for laws, sections, or keywords..." 
@@ -40,11 +41,11 @@ export default function LawsPage() {
           />
         </div>
 
-        <div className="filter-tags animate-fade">
+        <div className={`${styles.filterTags} animate-fade`}>
           {['All', 'Criminal', 'Civil', 'Cyber', 'Family', 'Corporate'].map(cat => (
             <button 
               key={cat} 
-              className={filter === cat ? 'active' : ''}
+              className={filter === cat ? styles.active : ''}
               onClick={() => setFilter(cat)}
             >
               {cat}
@@ -52,132 +53,26 @@ export default function LawsPage() {
           ))}
         </div>
 
-        <div className="laws-grid">
-          {filteredLaws.map(law => (
-            <div key={law.id} className="law-card animate-fade shadow-premium">
-              <div className="law-badge">{law.category}</div>
-              <h3>{law.title}</h3>
-              <p>{law.description}</p>
-              <button className="read-more">View Full Details →</button>
+        <div className={styles.lawsGrid}>
+          {filteredLaws.length > 0 ? (
+            filteredLaws.map(law => (
+              <div key={law.id} className={`${styles.lawCard} animate-fade`}>
+                <div className={styles.lawBadge}>{law.category}</div>
+                <h3>{law.title}</h3>
+                <p>{law.description}</p>
+                <button className={styles.readMore}>View Full Details →</button>
+              </div>
+            ))
+          ) : (
+            <div className={styles.noResults}>
+              <h3>No laws found matching your search.</h3>
+              <p>Try different keywords or browse by category.</p>
             </div>
-          ))}
+          )}
         </div>
       </div>
-
-      <style jsx>{`
-        .laws-wrapper {
-          padding: 4rem 0;
-          background: #f8fafc;
-          min-height: 100vh;
-        }
-        .laws-header {
-          text-align: center;
-          margin-bottom: 3rem;
-        }
-        .laws-header h1 {
-          font-size: 3rem;
-          margin-bottom: 1rem;
-        }
-        .laws-header p {
-          color: var(--text-light);
-        }
-
-        .search-bar-container {
-          background: white;
-          max-width: 800px;
-          margin: 0 auto 2rem;
-          display: flex;
-          align-items: center;
-          padding: 1rem 2rem;
-          border-radius: 50px;
-          border: 1px solid var(--border);
-        }
-        .search-icon {
-          font-size: 1.2rem;
-          margin-right: 1rem;
-        }
-        .search-bar-container input {
-          flex: 1;
-          border: none;
-          outline: none;
-          font-size: 1.1rem;
-          color: var(--primary);
-        }
-
-        .filter-tags {
-          display: flex;
-          justify-content: center;
-          gap: 1rem;
-          margin-bottom: 4rem;
-          flex-wrap: wrap;
-        }
-        .filter-tags button {
-          background: white;
-          border: 1px solid var(--border);
-          padding: 0.6rem 1.5rem;
-          border-radius: 50px;
-          font-weight: 600;
-          color: var(--text-light);
-          transition: all 0.2s;
-        }
-        .filter-tags button.active {
-          background: var(--primary);
-          color: white;
-          border-color: var(--primary);
-        }
-        .filter-tags button:hover:not(.active) {
-          border-color: var(--accent);
-          color: var(--accent);
-        }
-
-        .laws-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-          gap: 2rem;
-        }
-        .law-card {
-          background: white;
-          padding: 2.5rem;
-          border-radius: 20px;
-          position: relative;
-          transition: all 0.3s;
-          border: 1px solid var(--border);
-        }
-        .law-card:hover {
-          transform: translateY(-10px);
-          border-color: var(--accent);
-        }
-        .law-badge {
-          position: absolute;
-          top: 2rem;
-          right: 2rem;
-          background: var(--bg-slate);
-          padding: 0.4rem 1rem;
-          border-radius: 50px;
-          font-size: 0.75rem;
-          font-weight: 700;
-          color: var(--accent);
-        }
-        .law-card h3 {
-          font-size: 1.4rem;
-          margin-bottom: 1rem;
-          padding-right: 4rem;
-          line-height: 1.3;
-        }
-        .law-card p {
-          font-size: 0.95rem;
-          color: var(--text-light);
-          margin-bottom: 2rem;
-          line-height: 1.6;
-        }
-        .read-more {
-          background: transparent;
-          color: var(--primary);
-          font-weight: 700;
-          font-size: 0.9rem;
-          text-decoration: underline;
-        }
-      `}</style>
     </div>
+  );
+}
   );
 }

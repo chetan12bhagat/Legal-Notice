@@ -1,0 +1,167 @@
+.lawsWrapper {
+  padding: 4rem 0;
+  background: var(--bg-slate);
+  min-height: 100vh;
+}
+
+.lawsHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.lawsHeader h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.lawsHeader p {
+  color: var(--text-light);
+  font-size: 1.1rem;
+}
+
+.searchBarContainer {
+  background: white;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  display: flex;
+  align-items: center;
+  padding: 1.2rem 2.5rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.searchBarContainer:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 15px 35px -5px rgba(197, 160, 89, 0.15);
+  transform: translateY(-2px);
+}
+
+.searchIcon {
+  font-size: 1.4rem;
+  margin-right: 1.2rem;
+  opacity: 0.5;
+}
+
+.searchBarContainer input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1.1rem;
+  color: var(--primary);
+  background: transparent;
+}
+
+.filterTags {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 5rem;
+  flex-wrap: wrap;
+}
+
+.filterTags button {
+  background: white;
+  border: 1.5px solid var(--border);
+  padding: 0.8rem 2rem;
+  border-radius: 100px;
+  font-weight: 700;
+  color: var(--text-light);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.95rem;
+}
+
+.filterTags button.active {
+  background: var(--primary);
+  color: var(--accent);
+  border-color: var(--primary);
+  box-shadow: 0 10px 20px -5px rgba(26, 26, 46, 0.3);
+  transform: scale(1.05);
+}
+
+.filterTags button:hover:not(.active) {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(197, 160, 89, 0.05);
+}
+
+.lawsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 2.5rem;
+}
+
+.lawCard {
+  background: white;
+  padding: 3rem;
+  border-radius: 24px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.lawCard:hover {
+  transform: translateY(-12px);
+  border-color: var(--accent);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+}
+
+.lawBadge {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: #f1f5f9;
+  padding: 0.5rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.lawCard h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  padding-right: 5rem;
+  line-height: 1.3;
+  color: var(--primary);
+}
+
+.lawCard p {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+  flex: 1;
+}
+
+.readMore {
+  background: transparent;
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  width: fit-content;
+}
+
+.readMore:hover {
+  color: var(--accent);
+  transform: translateX(5px);
+}
+
+@media (max-width: 600px) {
+  .lawsGrid {
+    grid-template-columns: 1fr;
+  }
+  .lawsHeader h1 {
+    font-size: 2.5rem;
+  }
+}
