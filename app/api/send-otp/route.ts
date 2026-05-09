@@ -46,24 +46,24 @@ export async function POST(request: NextRequest) {
     });
 
     await transporter.sendMail({
-      from: `"Legal Notice" <${process.env.EMAIL_SENDER}>`,
+      from: `"Nyay Platform" <${process.env.EMAIL_SENDER}>`,
       to: email,
-      subject: `${otp} is your Legal Notice verification code`,
+      subject: `${otp} is your Nyay Platform verification code`,
       html: `
-        <div style="font-family: 'Segoe UI', sans-serif; padding: 40px 30px; max-width: 520px; margin: auto; background: #f8fafc; border-radius: 16px;">
+        <div style="font-family: 'Segoe UI', sans-serif; padding: 40px 30px; max-width: 520px; margin: auto; background: #0a0f1e; border-radius: 16px; color: white;">
           <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #1a1a2e; font-size: 28px; font-weight: 800; margin: 0;">Legal Notice</h1>
-            <p style="color: #c5a059; font-size: 12px; letter-spacing: 3px; margin-top: 4px; text-transform: uppercase;">Your Legal Rights, Our Priority</p>
+            <h1 style="color: #c5a059; font-size: 28px; font-weight: 800; margin: 0;">Nyay Platform</h1>
+            <p style="color: #94a3b8; font-size: 12px; letter-spacing: 3px; margin-top: 4px; text-transform: uppercase;">India's Digital Legal Platform</p>
           </div>
-          <div style="background: white; border-radius: 12px; padding: 32px; border: 1px solid #e2e8f0;">
-            <h2 style="color: #1a1a2e; font-size: 18px; margin-top: 0; font-weight: 700;">Verify your email address</h2>
-            <p style="color: #64748b; font-size: 14px; line-height: 1.6;">Use the code below to complete your sign-in to Legal Notice. This code is valid for <strong>10 minutes</strong>.</p>
-            <div style="background: #1a1a2e; color: #c5a059; text-align: center; font-size: 44px; font-weight: 800; letter-spacing: 14px; padding: 28px 16px; border-radius: 12px; margin: 28px 0; font-family: monospace;">
+          <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 32px; border: 1px solid rgba(255,255,255,0.1);">
+            <h2 style="color: white; font-size: 18px; margin-top: 0; font-weight: 700;">Verify your email address</h2>
+            <p style="color: #94a3b8; font-size: 14px; line-height: 1.6;">Use the code below to complete your sign-in to Nyay Platform. This code is valid for <strong>10 minutes</strong>.</p>
+            <div style="background: #0a0f1e; color: #c5a059; text-align: center; font-size: 44px; font-weight: 800; letter-spacing: 14px; padding: 28px 16px; border-radius: 12px; margin: 28px 0; font-family: monospace; border: 1px solid #c5a059;">
               ${otp}
             </div>
-            <p style="color: #94a3b8; font-size: 12px; margin: 0;">If you didn't request this, you can safely ignore this email. Someone may have entered your email by mistake.</p>
+            <p style="#64748b; font-size: 12px; margin: 0;">If you didn't request this, you can safely ignore this email.</p>
           </div>
-          <p style="text-align: center; color: #cbd5e1; font-size: 11px; margin-top: 28px;">© 2026 Legal Notice Platform &nbsp;·&nbsp; Secure Professional Access</p>
+          <p style="text-align: center; color: #64748b; font-size: 11px; margin-top: 28px;">© 2026 Nyay Platform &nbsp;·&nbsp; India's Digital Legal Platform</p>
         </div>
       `,
     });
