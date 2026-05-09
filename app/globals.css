@@ -1,13 +1,12 @@
 :root {
-  /* Version: 1.0.5 - UI RESTORE */
-  --primary: #0a0a1a;
+  --primary: #0a0f1e;
   --primary-light: #16213e;
   --accent: #c5a059;
   --accent-light: #d4af37;
-  --text-dark: #f8fafc;
+  --text-dark: #0f172a;
   --text-light: #94a3b8;
-  --bg-dark: #0a0a1a;
-  --bg-slate: #1e293b;
+  --bg-dark: #0a0f1e;
+  --bg-slate: #f8fafc;
   --white: #ffffff;
   --error: #ef4444;
   --success: #22c55e;
@@ -19,7 +18,7 @@
 /* Base Styles */
 html, body {
   background-color: var(--bg-dark) !important;
-  color: var(--text-dark) !important;
+  color: var(--white) !important;
   font-family: var(--font-sans) !important;
   margin: 0;
   padding: 0;
@@ -27,6 +26,8 @@ html, body {
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -47,6 +48,7 @@ button {
   border: none;
   outline: none;
   transition: all 0.3s ease;
+  font-family: var(--font-sans);
 }
 
 .container {
@@ -55,12 +57,16 @@ button {
   padding: 0 2rem;
 }
 
-/* Glassmorphism */
-.glass {
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
+/* Grid Background */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Navbar */
@@ -68,22 +74,22 @@ button {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 80px;
+  height: 90px;
   z-index: 1000;
   display: flex;
   align-items: center;
-  background: rgba(10, 10, 26, 0.8);
+  background: rgba(10, 15, 30, 0.8);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
 .nav-container {
-  width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
 }
 .logo-section {
   display: flex;
@@ -93,200 +99,225 @@ button {
 .nav-logo {
   height: 40px;
   width: auto;
-  filter: brightness(0) invert(1);
 }
 .brand-name {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: white;
-  letter-spacing: -0.5px;
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
 }
 .nav-links {
   display: flex;
-  gap: 2.5rem;
   align-items: center;
+  gap: 2rem;
 }
-.nav-links a {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: rgba(255,255,255,0.7) !important;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.nav-link {
+  font-weight: 500;
+  color: #94a3b8 !important;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
 }
-.nav-links a:hover {
+.nav-link.active {
+  background: rgba(197, 160, 89, 0.2);
   color: var(--accent) !important;
 }
-.login-btn {
+.nav-link:hover {
+  color: var(--white) !important;
+}
+.nav-btns {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.sign-in-link {
+  color: var(--white) !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.get-started-btn {
   background: var(--accent);
-  color: var(--primary) !important;
+  color: #000 !important;
   padding: 0.7rem 1.8rem;
-  border-radius: 50px;
+  border-radius: 8px;
   font-weight: 700;
+  font-size: 0.9rem;
 }
 
-/* Main Layout Fixes */
 main {
-  padding-top: 80px;
+  padding-top: 0; /* Hero covers the top */
 }
 
-/* Home Page */
-.home-wrapper {
-  background: var(--bg-dark);
-  min-height: 100vh;
-}
+/* Hero Section */
 .hero-section {
-  height: 70vh;
+  min-height: 100vh;
+  background: var(--primary);
   position: relative;
   display: flex;
   align-items: center;
+  padding-top: 90px;
   overflow: hidden;
 }
-.hero-overlay {
+.hero-glow {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 70% 30%, rgba(30, 41, 59, 0.4) 0%, rgba(10, 10, 26, 1) 100%);
-  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(197, 160, 89, 0.05) 0%, transparent 70%);
+  pointer-events: none;
 }
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 800px;
 }
-.hero-content h1 {
-  font-size: 4rem;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(197, 160, 89, 0.1);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
 }
-.text-accent { color: var(--accent); }
+.hero-content h1 {
+  font-size: 6rem;
+  line-height: 1;
+  margin-bottom: 2rem;
+  font-family: var(--font-serif);
+}
+.hero-content h1 .gold-text {
+  color: var(--accent);
+  display: block;
+}
+.hero-content p {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
 .hero-btns {
   display: flex;
   gap: 1.5rem;
-  margin-top: 2.5rem;
 }
-.btn-primary-hero {
+.btn-search {
   background: var(--accent);
-  color: var(--primary) !important;
-  padding: 1.1rem 2.5rem;
-  border-radius: 50px;
+  color: #000 !important;
+  padding: 1.2rem 2.5rem;
+  border-radius: 8px;
   font-weight: 700;
-  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.btn-secondary-hero {
+.btn-lawyer {
   background: transparent;
-  border: 2px solid rgba(255,255,255,0.3);
-  color: white !important;
-  padding: 1.1rem 2.5rem;
-  border-radius: 50px;
+  border: 1px solid var(--white);
+  color: var(--white) !important;
+  padding: 1.2rem 2.5rem;
+  border-radius: 8px;
   font-weight: 700;
-  font-size: 1rem;
-}
-.btn-secondary-hero:hover {
-  border-color: white;
-  background: rgba(255,255,255,0.05);
 }
 
-.main-layout {
-  display: grid;
-  grid-template-columns: 280px 1fr 300px;
-  gap: 2.5rem;
-  margin-top: 4rem;
-}
-
-/* Cards */
-.home-card, .law-card, .consult-card, .login-card, .profile-card-field {
-  background: rgba(30, 41, 59, 0.4);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-}
-
-.avatar-large {
-  width: 80px;
-  height: 80px;
-  background: var(--accent);
-  color: var(--primary);
-  border-radius: 50%;
+/* Login Page */
+.login-wrapper {
+  min-height: 100vh;
+  background: var(--bg-dark);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 1.8rem;
-  margin: -60px auto 1rem;
-  border: 4px solid var(--bg-dark);
+  position: relative;
+  overflow: hidden;
 }
-.profile-bg {
-  height: 100px;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  margin: -2rem -2rem 0;
-  border-radius: 24px 24px 0 0;
-}
-
-/* Posts */
-.post-trigger {
+.login-card {
+  max-width: 480px;
   width: 100%;
-  background: rgba(0,0,0,0.2);
+  padding: 4rem 3rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
   border: 1px solid var(--border);
-  border-radius: 50px;
-  padding: 1rem 1.5rem;
-  color: var(--text-light);
-  text-align: left;
+  border-radius: 24px;
+  position: relative;
+  z-index: 2;
+}
+.login-submit-btn {
+  background: var(--accent);
+  color: #000;
+  padding: 1.2rem;
+  width: 100%;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
+.login-input-group input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: white;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  outline: none;
+}
+.login-input-group input:focus {
+  border-color: var(--accent);
+}
+.role-selector {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+.role-selector button {
+  background: transparent !important;
+  color: #94a3b8 !important;
+}
+.role-selector button.active {
+  background: var(--accent) !important;
+  color: #000 !important;
 }
 
 /* Indian Laws Page */
 .laws-wrapper {
-  padding: 6rem 0;
+  padding: 120px 0 5rem;
+  background: var(--bg-dark);
 }
 .laws-header { text-align: center; margin-bottom: 4rem; }
 .search-bar-container {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border);
   border-radius: 100px;
   padding: 1.2rem 2.5rem;
-  margin: 3rem auto;
+  margin: 0 auto 3rem;
   max-width: 800px;
+  display: flex;
+  align-items: center;
 }
 .search-bar-container input {
   background: transparent;
   border: none;
-  color: white;
   width: 100%;
   font-size: 1.1rem;
+  padding: 0 1rem;
   outline: none;
-}
-.laws-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
+  color: white;
 }
 
 /* Consult Page */
-.consult-form-grid {
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 2.5rem;
+.consult-wrapper {
+  padding: 120px 0 5rem;
+  background: var(--bg-dark);
 }
-.consult-input-group { margin-bottom: 1.5rem; }
-.consult-input-group label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; color: var(--text-light); font-weight: 600; }
-.consult-submit-btn {
-  width: 100%;
-  background: var(--accent);
-  color: var(--primary);
-  padding: 1.2rem;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1.1rem;
+.consult-input-group input, .consult-input-group textarea, .consult-input-group select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: white;
 }
-
-/* Profile Details */
-.profile-hero {
-  padding: 6rem 0;
-  background: radial-gradient(circle at 0% 0%, #1e293b 0%, #0a0a1a 100%);
-  border-bottom: 1px solid var(--border);
-}
-.hero-content-profile { display: flex; align-items: center; gap: 3rem; }
-.avatar-img-profile { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--accent); object-fit: cover; }
 
 /* Animations */
 .animate-fade {
@@ -297,9 +328,41 @@ main {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
-@media (max-width: 1000px) {
-  .main-layout, .consult-form-grid { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
-  .hero-content h1 { font-size: 2.8rem; }
+/* Waves at bottom of hero */
+.hero-waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  fill: #fff;
 }
+
+/* Section styling for light content areas if needed */
+.light-section {
+  background: #fff;
+  color: var(--text-dark);
+  padding: 5rem 0;
+}
+.light-section h2 {
+  color: var(--text-dark);
+}
+
+/* Cards (Modified for dark theme) */
+.home-card, .law-card, .consult-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  color: var(--white);
+}
+
+/* Footer */
+.footer {
+  background: #050811;
+  padding: 5rem 0 2rem;
+  border-top: 1px solid var(--border);
+}
+.footer h4 { color: var(--accent); margin-bottom: 1.5rem; }
+.footer a { color: #64748b; font-size: 0.9rem; }
+.footer a:hover { color: var(--white); }

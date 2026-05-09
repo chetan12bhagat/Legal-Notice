@@ -23,13 +23,18 @@ export default function LawsPage() {
 
   return (
     <div className="laws-wrapper">
+      <div className="grid-overlay"></div>
       <div className="container">
         <div className="laws-header animate-fade">
-          <h1>Indian Laws Directory</h1>
-          <p>Search and understand the legal framework of India.</p>
+          <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Indian Laws <span className="gold-text">Explorer</span></h1>
+          <p style={{ color: '#94a3b8', fontSize: '1.2rem' }}>Search and understand the legal framework of India in plain language.</p>
         </div>
 
         <div className="search-bar-container animate-fade">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
           <input 
             type="text" 
             placeholder="Search for laws, sections, or keywords..." 

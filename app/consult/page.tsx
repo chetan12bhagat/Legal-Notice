@@ -32,10 +32,11 @@ export default function ConsultPage() {
 
   return (
     <div className="consult-wrapper">
+      <div className="grid-overlay"></div>
       <div className="container">
         <div className="consult-header animate-fade">
-          <h1>Consult a Lawyer</h1>
-          <p>Provide your case details and documents for a professional legal evaluation.</p>
+          <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Submit Your <span className="gold-text">Case</span></h1>
+          <p style={{ color: '#94a3b8', fontSize: '1.2rem' }}>Provide your case details and documents for a professional legal evaluation by verified lawyers.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="animate-fade">

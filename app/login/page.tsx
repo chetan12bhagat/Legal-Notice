@@ -30,25 +30,28 @@ export default function LoginPage() {
 
   return (
     <div className="login-wrapper">
+      <div className="grid-overlay"></div>
       <div className="login-card animate-fade">
         <div className="login-header">
-          <img src="/images/logo.png" alt="Legal Notice" className="login-logo" style={{filter: 'brightness(0) invert(1)'}} />
-          <h2 style={{color: 'white', marginBottom: '1rem'}}>Welcome to Legal Notice</h2>
-          <p style={{color: 'var(--text-light)', marginBottom: '2rem'}}>
-            {step === 1 ? "Secure access to your legal dashboard" : "Verify your identity"}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="var(--accent)">
+              <path d="M12 3L4 9v2c0 5.25 3.41 10.19 8 11.5 4.59-1.31 8-6.25 8-11.5V9l-8-6zm0 2.18l6 4.5v1.32c0 4.28-2.67 8.31-6 9.5-3.33-1.19-6-5.22-6-9.5V9.68l6-4.5zM11 7v2h2V7h-2zm0 4v6h2v-6h-2z"/>
+            </svg>
+          </div>
+          <h2 style={{ marginBottom: '0.5rem', color: 'white' }}>Welcome to Nyay</h2>
+          <p style={{ color: 'var(--text-light)', marginBottom: '2rem' }}>
+            {step === 1 ? "Enter your email to access your account" : "Enter the verification code sent to your email"}
           </p>
         </div>
 
         {step === 1 && (
-          <div className="role-selector" style={{display: 'flex', background: 'rgba(0,0,0,0.3)', padding: '0.5rem', borderRadius: '12px', marginBottom: '2rem'}}>
+          <div className="role-selector" style={{ display: 'flex', padding: '0.5rem', borderRadius: '12px', marginBottom: '2rem' }}>
             <button 
               className={role === 'user' ? 'active' : ''} 
               onClick={() => setRole('user')}
               style={{
                 flex: 1, padding: '0.8rem', borderRadius: '8px', 
-                background: role === 'user' ? 'var(--accent)' : 'transparent',
-                color: role === 'user' ? 'var(--primary)' : 'white',
-                fontWeight: 700
+                fontWeight: 600
               }}
             >
               For Clients
@@ -58,9 +61,7 @@ export default function LoginPage() {
               onClick={() => setRole('lawyer')}
               style={{
                 flex: 1, padding: '0.8rem', borderRadius: '8px', 
-                background: role === 'lawyer' ? 'var(--accent)' : 'transparent',
-                color: role === 'lawyer' ? 'var(--primary)' : 'white',
-                fontWeight: 700
+                fontWeight: 600
               }}
             >
               For Lawyers
@@ -70,24 +71,24 @@ export default function LoginPage() {
 
         {step === 1 ? (
           <form onSubmit={handleSendOtp} className="login-form">
-            <div className="login-input-group">
-              <label>Email Address</label>
+            <div className="login-input-group" style={{ textAlign: 'left' }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700, color: '#94a3b8' }}>Email Address</label>
               <input 
                 type="email" 
-                placeholder="name@example.com" 
+                placeholder="name@company.com" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required 
               />
             </div>
-            <button type="submit" className="login-submit-btn" disabled={loading} style={{width: '100%'}}>
-              {loading ? 'Processing...' : 'Get Verification Code'}
+            <button type="submit" className="login-submit-btn" disabled={loading}>
+              {loading ? 'Sending OTP...' : 'Continue'}
             </button>
           </form>
         ) : (
           <form onSubmit={handleVerifyOtp} className="login-form">
-            <div className="login-input-group">
-              <label>Enter 4-Digit OTP</label>
+            <div className="login-input-group" style={{ textAlign: 'left' }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 700, color: '#94a3b8' }}>Verification Code</label>
               <input 
                 type="text" 
                 placeholder="0 0 0 0" 
@@ -98,17 +99,17 @@ export default function LoginPage() {
                 style={{ textAlign: 'center', letterSpacing: '1rem', fontSize: '1.5rem' }}
               />
             </div>
-            <button type="submit" className="login-submit-btn" disabled={loading} style={{width: '100%'}}>
+            <button type="submit" className="login-submit-btn" disabled={loading}>
               {loading ? 'Verifying...' : 'Verify & Login'}
             </button>
-            <button type="button" className="back-btn" onClick={() => setStep(1)} style={{marginTop: '1.5rem'}}>
+            <button type="button" className="back-btn" onClick={() => setStep(1)} style={{ marginTop: '1rem', background: 'transparent', color: 'var(--text-light)', width: '100%' }}>
               ← Back to email
             </button>
           </form>
         )}
         
-        <p style={{marginTop: '2.5rem', fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)'}}>
-          By continuing, you agree to our <span style={{color: 'var(--accent)'}}>Terms of Service</span>
+        <p style={{ marginTop: '2rem', fontSize: '0.85rem', color: 'var(--text-light)' }}>
+          By continuing, you agree to our <span style={{ color: 'var(--accent)', fontWeight: 700 }}>Terms of Service</span>
         </p>
       </div>
     </div>
