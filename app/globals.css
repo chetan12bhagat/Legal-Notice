@@ -235,60 +235,135 @@ main {
   border-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Login Page */
+/* Login Page Refined */
 .login-wrapper {
   min-height: 100vh;
-  background: var(--bg-dark);
+  background: #f1f5f9;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  padding: 2rem;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 1000px;
+  min-height: 600px;
+  background: white;
+  border-radius: 32px;
   overflow: hidden;
+  display: flex;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
 }
-.login-card {
-  max-width: 480px;
-  width: 100%;
-  padding: 4rem 3rem;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  position: relative;
-  z-index: 2;
-}
-.login-submit-btn {
-  background: var(--accent);
-  color: #000;
-  padding: 1.2rem;
-  width: 100%;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-top: 2rem;
-}
-.login-input-group input {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
+
+.auth-left {
+  flex: 1;
+  background: linear-gradient(180deg, #1e3a8a 0%, #3b82f6 100%);
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: white;
+}
+
+.auth-right {
+  width: 500px;
+  padding: 4rem;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.auth-input {
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 1.25rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
+  font-size: 1rem;
+  color: #1e293b;
+  transition: all 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.auth-input:focus {
+  background: white;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
   outline: none;
 }
-.login-input-group input:focus {
-  border-color: var(--accent);
+
+.auth-submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #0f172a;
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
 }
-.role-selector {
-  background: rgba(255, 255, 255, 0.05) !important;
+
+.auth-submit-btn:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
 }
-.role-selector button {
-  background: transparent !important;
-  color: #94a3b8 !important;
+
+.social-auth-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
-.role-selector button.active {
-  background: var(--accent) !important;
-  color: #000 !important;
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e293b;
+  transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.divider-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
 }
 
 /* Indian Laws Page */
