@@ -13,6 +13,7 @@ interface User {
 export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -25,9 +26,17 @@ export default function Navbar() {
       }
     };
 
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
     updateUser();
     window.addEventListener('storage', updateUser);
-    return () => window.removeEventListener('storage', updateUser);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('storage', updateUser);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -41,15 +50,14 @@ export default function Navbar() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         <div className="logo-section">
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 3v17m-9-5l9-2 9 2M3 10l9-2 9 2M6 20h12" />
-              <circle cx="12" cy="3" r="1" fill="var(--accent)" />
             </svg>
-            <span className="brand-name">Nyay Platform</span>
+            <span className="brand-name">Nyay<span style={{color: 'var(--accent)'}}>Platform</span></span>
           </Link>
         </div>
         
